@@ -1,0 +1,10 @@
+<div ng-controller="DraftsController as vm" class="container text-center">
+  <br>
+  <h3>My Drafts</h3>
+  <br>
+
+  <div class="draft" ng-repeat="i in [1,2,3,4,5,6,7,8]" ui-sref="ViewDraft">
+    <img src="http://uxrepo.com/static/icon-sets/elusive/svg/group.svg" alt="Draft Icon" style="max-width: 5vw;"/>
+    <p>Mock Draft {{ i }}</p>
+  </div>
+</div>

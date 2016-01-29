@@ -1,0 +1,20 @@
+<div ng-controller="ViewDraftController as vm" class="container text-center">
+  <br>
+  <h3>View Draft</h3>
+  <br>
+  <div class="draftBox" style="width: 100%;">
+    <h3 class="text-center">Round One:</h3>
+    <div class="pick text-left" ng-repeat="i in vm.picks" ng-style="{'background-image': 'url(' + i.logo + ')'} " ng-class="{'selectedPick':i.player}" ng-click="vm.removePick(i);">
+      <div ng-show="i.player">
+          <h4 ng-show="i.player" style="margin-top: 1.15em">{{ i.player.name }} - {{ i.player.position }} | {{ i.player.school }}</h4>
+      </div>
+      <div ng-show="!i.player">
+        <h4>{{ i.team }}</h4>
+        <p>#{{i.number}} - <small>Team Needs: <span ng-repeat="need in i.needs"><small><strong>{{ need }} </strong></small></span></small></p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="button" ui-sref="EditDraft">Edit</button>
+
+</div>

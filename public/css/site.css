@@ -1,0 +1,377 @@
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+/* Globals */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: url('http://s17.postimg.org/ymr2mezsv/image.jpg');
+  background-size: cover;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #333;
+  overflow-y: auto;
+}
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+}
+hr {
+  width: 80%;
+  border-color: #333;
+  margin: 1em auto;
+}
+::selection {
+  background: rgba(0,0,0,0); /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: rgba(0,0,0,0); /* Gecko Browsers */
+}
+a {
+  color: #333;
+}
+a:hover {
+  color: #f00 !important;
+  text-decoration: none;
+}
+a:active {
+  color: #f00;
+  text-decoration: none;
+}
+a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+
+
+/* Headings */
+h1 {
+  margin: 0;
+  padding: 1em;
+  font-family: 'Lobster', cursive;
+  font-size: 1.75em;
+  color: #666;
+  text-shadow: 0px 0px 5px rgba(255,255,255,1);
+}
+h3 {
+  font-family: 'Lobster', cursive;
+  text-shadow: 0px 0px 5px rgba(255,255,255,1);
+  font-size: 1.5em;
+  color: #666;
+}
+h4 {
+  text-shadow: none;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Inputs */
+
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 80%;
+  background: #333;
+  outline: none;
+  border: none;
+  margin: 1em auto;
+  padding: .5em;
+  font-size: .75em;
+  color: #fff;
+}
+/* Placeholder Text */
+input::-webkit-input-placeholder {
+  font-style: italic;
+  font-size: .8em;
+  padding: .25em 0 0 .5em;
+}
+input:-moz-placeholder { /* Firefox 18- */
+  font-style: italic;
+  font-size: .8em;
+  padding: .25em 0 0 .5em;
+}
+input::-moz-placeholder {  /* Firefox 19+ */
+  font-style: italic;
+  font-size: .8em;
+  padding: .25em 0 0 .5em;
+}
+input:-ms-input-placeholder {
+  font-style: italic;
+  font-size: .8em;
+  padding: .25em 0 0 .5em;
+}
+.btn {
+  background-color: #333;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+.btn:hover {
+  background-color: #666;
+}
+button:active {
+  outline: none !important;
+  border: none !important;
+}
+label {
+  font-weight: normal;
+}
+
+/* Nav */
+nav {
+  text-align: center;
+  background: #333;
+  position: fixed;
+  color: #fff;
+  z-index: 9999;
+  top: 0;
+  left: -15%;
+  width: 15%;
+  height: 100vh;
+  box-shadow: 0px 0px 10px rgba(0,0,0,.1);
+  transition-duration: .35s;
+    -webkit-transition-duration: .35s;
+}
+nav h3 {
+  color: #fff;
+}
+nav li {
+  padding: 1em 3em;
+}
+nav li:hover {
+  cursor: pointer;
+  background: #555;
+}
+nav .btn {
+  background: #fff;
+  color: #333;
+}
+nav .btn:hover {
+  background: #aaa;
+  color: #333 !important; /*Bootstrap .btn class sets hover to white */
+}
+nav img {
+  max-width: 3vw;
+  max-height: 3vh;
+  display: inline;
+}
+#menuShade {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.8);
+  cursor: pointer;
+  z-index: 999;
+  display: none;
+}
+
+
+
+/* Draft */
+.draftBox {
+  display: block;
+  border: solid 2px #ddd;
+  width: 50%;
+  height: 65vh;
+  overflow-y: auto;
+}
+.pick {
+  background: #eee;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: 95%;
+  margin: .5em 0;
+  height: 10vh;
+  color: #333;
+  padding: .75em;
+}
+.pick:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.pick:active {
+  cursor: -webkit-grabbing;
+  cursor:-moz-grabbing;
+}
+.selectedPick {
+  background-color: #aaa;
+  color: #fff;
+}
+#posButtonBox {
+  width: 100%;
+  overflow: hidden;
+  transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+}
+.posButton {
+  background: #333;
+  height: 3vh;
+  width: 3vw;
+  display: inline-block;
+  margin: .75em;
+  padding: .75em;
+  font-size: .5em;
+  color: #ccc;
+}
+.posButton:hover {
+  cursor: pointer;
+  background: #666;
+}
+.availPlayer {
+  text-align: right;
+  padding: .5em;
+  background: #eee;
+  margin: .75em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+.availPlayer:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.availPlayer:active {
+  cursor: -webkit-grabbing;
+  cursor:-moz-grabbing;
+}
+#playerModal {
+  width: 40vw;
+  height: 42.5vh;
+  border: solid 2px #ccc;
+  background-color: white;
+  background-size: 15%;;
+  background-repeat: no-repeat;
+  background-position: center 25%;
+  position: absolute;
+  top: 3%;
+  left: 22.5%;
+}
+#modalPicture {
+  max-width: 10vw;
+  max-height: 15vh;
+  margin: 1em auto;
+  border: solid 2px #ccc;
+}
+
+
+
+
+
+/* Big Board */
+#bigBoard {
+  border: solid 2px #ddd;
+  width: 100%;
+  margin: 0 auto;
+  height: 65vh;
+  overflow-y: scroll;
+}
+
+
+
+/* News */
+.newsArticle {
+  border-top: solid 2px #ccc;
+  border-bottom: solid 2px #ccc;
+  background: #eee;
+  padding: 1em .5em;
+  width: 100%;
+  height: 25vh;
+  margin: .5em 0;
+}
+.newsArticle:hover {
+  border-top: solid 2px #aaa;
+  border-bottom: solid 2px #aaa;
+  background-color: #ddd;
+}
+
+
+/* Classes */
+.inline {
+  display: inline;
+}
+.jumbotron {
+  padding: 0;
+  background-image: url('http://i.imgur.com/6eNMjru.jpg');
+  background-size: cover;
+  background-position: 0% 82.5%;
+  height: 50vh;
+}
+.jumbotron button {
+  position: absolute;
+  bottom: 40%;
+  left: 35%;
+  width: 30%;
+  height: 10vh;
+  margin: 0 auto;
+  border-radius: .75em;
+}
+.arrowIcons img {
+  height: 3vh;
+  width: 3vh;
+}
+.arrowIcons img:hover {
+  cursor: pointer;
+}
+.draft {
+  display: inline-block;
+  margin: 1em;
+  cursor: pointer;
+  background: #eee;
+  padding: 2em;
+  border: solid 2px #ccc;
+}
+.draft:hover {
+  background: #ddd;
+  border-color: #aaa;
+}
+
+
+
+/* IDs */
+
+#menuButton {
+  margin: 1.5em;
+  border: none;
+  background: #333;
+}
+#menuButton:hover {
+  background: #666;
+}
+#topBar {
+  background: url('http://s17.postimg.org/ymr2mezsv/image.jpg');
+  background-size: cover;
+  box-shadow: 0px 10px 10px rgba(0,0,0,.1);
+}
+
+#circle {
+  width: 10vh;
+  height: 10vh;
+  border-radius: 100%;
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Kansas_City_Chiefs_logo.svg/1280px-Kansas_City_Chiefs_logo.svg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 1em auto;
+}
+#coverImg {
+  width: 100%;
+  max-height: 40vh;
+  margin: 0;
+  padding: 0;
+}
+#copyright {
+  position: absolute;
+  bottom: .5em;
+  width: 100%;
+  font-size: .7em;
+  text-align: center;
+}
+#introText {
+  width: 80%;
+  font-size: .8em;
+  margin: 0 auto;
+}

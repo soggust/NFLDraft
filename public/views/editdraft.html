@@ -1,0 +1,94 @@
+<div ng-controller="EditDraftController as vm" class="container text-center">
+  <br>
+  <h3>Edit Draft</h3>
+  <br>
+
+    <!-- Left Box -->
+    <div class="draftBox pull-left" style="width: 65%">
+      <h3>2016 NFL Draft Order - </h3>
+      <h4 class="text-center"><small>Round One:</small></h4>
+      <div class="pick text-left" ng-repeat="i in vm.picks" ng-style="{'background-image': 'url(' + i.logo + ')'} " ng-class="{'selectedPick':i.player}" ng-click="vm.removePick(i);">
+        <div ng-show="i.player">
+            <h4 ng-show="i.player" style="margin-top: 1.15em">{{ i.player.name }} - {{ i.player.position }} | {{ i.player.school }}</h4>
+        </div>
+        <div ng-show="!i.player">
+          <h4>{{ i.team }}</h4>
+          <p>#{{i.number}} - <small>Team Needs: <span ng-repeat="need in i.needs"><small><strong>{{ need }} </strong></small></span></small></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Box -->
+    <div class="draftBox pull-right" style="width: 35%; overflow: hidden;">
+      <h3>Available Players - </h3>
+      <br>
+      <div class="text-right" style="padding-right: 1em;">
+        <button type="button" class="btn" ng-show="upperMenu === '0vh'" ng-click="vm.toggleMenu()">Search</button>
+        <button type="button" class="btn" ng-show="upperMenu != '0vh'" ng-click="vm.toggleMenu()">▲</button>
+      </div>
+      <div id="posButtonBox" ng-style="{'height': upperMenu}">
+        <br>
+        <div class="posButton" ng-click="vm.searchFilter = {}">ALL</div>
+        <div class="posButton" ng-repeat="i in vm.positions" ng-click="vm.searchFilter = {'position': i}">{{ i }}</div>
+        <input type="text" placeholder="Search By Name" ng-model="searchPlayer"/>
+        <hr>
+      </div>
+      <div ng-show="vm.searchFilter.position">
+        <br>
+        <p><small>Displaying: {{vm.searchFilter.position}}</small></p>
+      </div>
+      <div style="overflow-y: auto;" ng-style="{'height': lowerMenu}">
+            <div class="availPlayer" ng-repeat="i in vm.prospects | filter: vm.searchFilter : true | filter: {'name': searchPlayer} | limitTo:25 | orderBy: 'bbRank'" ng-mouseenter="vm.showModal = true; vm.setModalPlayer(i)" ng-mouseleave="vm.showModal = false" ng-click="vm.addToDraft(i, 0)" ng-style="{'background-image': 'url(' + i.schImg + ')'}"><strong><small>({{i.bbRank}})</small> {{ i.name }} </strong> &nbsp; | &nbsp; {{i.position}} <small>({{i.rank}})</small></div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-xs-6 text-left">
+        <input type="checkbox" ng-model="vm.tooltipChecked"/><em><small>Show Player Information On Mouseover</small></em>
+      </div>
+      <div class="col-xs-6 text-right">
+        <p><small><em>The New England Patriots first round draft pick has been removed due to rule violations.*</em></small></p>
+      </div>
+    </div>
+
+
+
+    <!-- Save Buttons -->
+    <div ng-show="!vm.saving">
+      <button type="button" class="btn" ng-click="vm.saving = true" ng-if="nav.loggedIn === true">Save</button>
+      <button type="button" class="btn" ng-click="vm.clearBoard()">Clear</button>
+    </div>
+    <div ng-show="vm.saving">
+      <div class="text-center pull-left" style="width: 25%;">
+        <label><input type="checkbox" checked><small>Share With Community</small></label>
+      </div>
+      <input type="text" placeholder="Mock Draft Name" style="width: 50%; font-size: 1em; padding: .5em; margin: 0;" class="pull-left"/>
+      <div class="pull-right" style="width: 25%;">
+        <button type="button" class="btn" ng-click="vm.saving = false" ui-sref="ViewDraft">Save</button>
+        <button type="button" class="btn" ng-click="vm.saving = false">Cancel</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <!-- Player Modal -->
+    <div id="playerModal" ng-show="vm.showModal && vm.tooltipChecked" ng-style="{'background-image': 'url(' + vm.modalPlayer.schImg + ')'}">
+      <h3>Player Information</h3>
+      <div class="row">
+        <div class="col-xs-6 text-left">
+          <div style="padding: .5em 2em;">
+            <h4>{{ vm.modalPlayer.name }} <small>({{ vm.modalPlayer.bbRank }})</small></h4>
+            <p>{{ vm.modalPlayer.position }} <small>({{ vm.modalPlayer.rank }})</small> - {{ vm.modalPlayer.school }}</p>
+            <p>{{ vm.modalPlayer.height }} - {{ vm.modalPlayer.weight }} lbs</p>
+            <p style="font-size: .75em;">{{vm.modalPlayer.bio}}</p>
+          </div>
+        </div>
+        <div class="col-xs-6 text-right">
+          <div style="padding: .5em 2em;">
+            <img ng-src="{{vm.modalPlayer.img}}" alt="Player Picture"  id="modalPicture" /><br >
+            <p class="text-right"><small><span style="color: green;">Strengths:  </span><br /><span style="font-size: .75em; margin: 0 .5em;" ng-repeat="s in vm.modalPlayer.strengths">{{ s }}</span></small><br /><small><span style="color: red;">Weaknesses:  </span><br /><span style="font-size: .75em; margin: 0 .5em;" ng-repeat="w in vm.modalPlayer.weaknesses">{{ w }}</span></small></p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+</div>
