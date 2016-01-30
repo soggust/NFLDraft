@@ -3,7 +3,7 @@
   <h3>My Drafts</h3>
   <br>
   <p ng-show="vm.drafts.length < 1">You don't have any mock drafts yet! Start by <span ui-sref="Create" style="color: #f90; cursor: pointer;">creating</span> a new mock now!</p>
-  <div class="draft" ng-repeat="i in vm.drafts" ui-sref="ViewDraft">
+  <div class="draft" ng-repeat="i in vm.drafts" ui-sref="ViewDraft" ng-click="vm.setCurrentDraft(i);">
     <img src="http://uxrepo.com/static/icon-sets/elusive/svg/group.svg" alt="Draft Icon" style="max-width: 5vw;"/>
     <p>{{ i.name }}</p>
   </div>

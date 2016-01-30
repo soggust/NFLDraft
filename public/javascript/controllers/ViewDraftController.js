@@ -5,8 +5,9 @@
 
 	function ViewDraftController (HomeFactory) {
 		var vm = this;
+		vm.draft = HomeFactory.currentDraft;
 
-		vm.picks = HomeFactory.picks;
+		console.log(vm.draft);
 
 	}
 })();

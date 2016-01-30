@@ -325,6 +325,7 @@ nav img {
 }
 .draft {
   display: inline-block;
+  position: relative;
   margin: 1em;
   cursor: pointer;
   background: #eee;
@@ -386,4 +387,17 @@ nav img {
   width: 80%;
   font-size: .8em;
   margin: 0 auto;
+}
+#comArrow {
+  float: right;
+  margin: 27.5vh 2vw 0 0;
+  max-height: 5vh;
+  max-width: 2.5vw;
+  opacity: .5;
+  transition-duration: .25s;
+    -webkit-transition-duration: .25s;
+}
+#comArrow:hover {
+  opacity: 1;
+  cursor: pointer;
 }

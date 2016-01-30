@@ -3,7 +3,7 @@
 	angular.module('app')
 	.controller('DraftsController', DraftsController);
 
-	function DraftsController(UserFactory) {
+	function DraftsController(UserFactory, HomeFactory) {
 		var vm = this;
 		vm.drafts = [];
 
@@ -14,6 +14,11 @@
 			});
 		}
 		vm.getDrafts();
+
+		/* Set Draft Information For Viewing */
+		vm.setCurrentDraft = function(draft) {
+			HomeFactory.currentDraft = draft;
+		};
 
 	}
 })();
