@@ -41,6 +41,7 @@
 			nav.user.profilePic = "https://upload.wikimedia.org/wikipedia/en/9/99/MarioSMBW.png";
 			UserFactory.register(nav.user).then(function(){
 				nav.user = {};
+				nav.status = UserFactory.status;
 				nav.errReg = "";
 			}, function(err){
 				console.log(err);

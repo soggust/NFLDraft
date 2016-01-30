@@ -3,16 +3,19 @@
 	angular.module('app')
 	.controller('BigBoardController', BigBoardController);
 
-	function BigBoardController(HomeFactory) {
+	function BigBoardController(HomeFactory, UserFactory) {
 		var vm = this;
 
 		vm.prospects = [];
 
 		/* Gets Our Prospects Array */
 		vm.getProspects = function () {
-			HomeFactory.getProspects().then(function(res){
-				vm.prospects = res;
-			});
+			console.log(UserFactory.status.prospects);
+			if(UserFactory.status.prospects) {
+				vm.prospects = UserFactory.status.prospects;
+			} else {
+				vm.prospects = HomeFactory.prospects;
+			}
 		}
 
 		/* Move Player Up Or Down Board */

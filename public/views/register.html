@@ -4,13 +4,15 @@
   <br>
     <div class="draftBox" style="margin: 0 auto; height: 45vh;">
       <br>
-      <input type="text" placeholder="Username" ng-model="nav.user.username" />
-      <input type="email" placeholder="Email Address" ng-model="nav.user.email"/>
-      <input type="password" placeholder="Password" ng-model="nav.user.password" />
-      <input type="password" placeholder="Confirm Password" ng-model="nav.user.confirm" />
-      <br>
-      <br>
-      <button type="button" class="btn" ui-sref="Home" ng-click="nav.registerUser();">Register</button>
-      <button type="button" class="btn" ui-sref="Home">Cancel</button>
+      <form ng-submit="nav.registerUser();">
+        <input type="text" placeholder="Username" ng-model="nav.user.username" />
+        <input type="email" placeholder="Email Address" ng-model="nav.user.email"/>
+        <input type="password" placeholder="Password" ng-model="nav.user.password" />
+        <input type="password" placeholder="Confirm Password" ng-model="nav.user.confirm" />
+        <br>
+        <br>
+        <button type="submit" class="btn btn-warning" ui-sref="Home">Register</button>
+        <button type="button" class="btn" ui-sref="Home">Cancel</button>
+      </form>
     </div>
 </div>

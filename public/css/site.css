@@ -286,7 +286,7 @@ nav img {
   background: #eee;
   padding: 1em .5em;
   width: 100%;
-  height: 25vh;
+  /*height: 25vh;*/
   margin: .5em 0;
 }
 .newsArticle:hover {
@@ -343,7 +343,7 @@ nav img {
 /* IDs */
 
 #menuButton {
-  margin: 1.5em;
+  margin: 1.5em .5em 1.5em 1em;
   border: none;
   background: #333;
 }

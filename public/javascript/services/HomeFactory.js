@@ -3,9 +3,9 @@
 	angular.module('app')
 	.factory('HomeFactory', HomeFactory);
 
-	function HomeFactory($http, $q) {
+	function HomeFactory($http, $q, UserFactory) {
 		var o = {};
-		var prospects = [
+		o.prospects = [
 			{name: "Joey Bosa", position: "DE", height: "6-5", weight: 275, rank: 1, bbRank: 1, school: "Ohio State", img: "http://www.10tv.com/content/graphics/2014/10/02/4_Joey_Bosa.jpg", schImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/2013_Ohio_State_Buckeyes_logo.svg/1040px-2013_Ohio_State_Buckeyes_logo.svg.png",  bio: "One of the stars of Ohio State's National Title run in the 2014 season, Bosa was a top high school recruit out of high school and has lived up to that high billing, leading the Buckeyes with 21 tackles for loss and 13.5 sacks as a sophomore. He is still developing his pass rush sequence and how to best use his gifts, but he has all the traits to be a top pick in the 2016 class and disruptive presence in the NFL.", strengths: ["Physical At Line Of Scrimmage", "Great Play Awareness"], weaknesses: ["Needs To Shed Blocks Better", "Needs To Gain 20lbs", "Might Not Fit All Schemes"]},
 			{name: "Laremy Tunsil", position: "OT", height: "6-5", weight: 305, rank: 1, bbRank: 2, school: "Ole Miss", img: "http://i1.wp.com/djournal.com/wp-content/blogs.dir/42/files/2014/11/Tunsil-Laremy.jpg", schImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ole_Miss_rebels_Logo.svg/2000px-Ole_Miss_rebels_Logo.svg.png",  bio: "On the field, Tunsil is a nimble big man with a rare athletic skill-set for the position, showing above average balance and flexibility to easily bend, handle speed and absorb power at the point of attack. He's not a perfect player, but his flaws are more nitpicking than true weaknesses and potential injuries are the only obstacles keeping Tunsil from being one of the better left tackles at the next level.", strengths: ["Good Size", "Great Balance", "Good Change of Direction"], weaknesses: ["Overeager at Times", "Injury Concerns", "Character Concerns"]},
 			{name: "Jalen Ramsey", position: "CB", height: "6-1", weight: 202, rank: 1, bbRank: 3, school: "Florida State", img: "http://www.gannett-cdn.com/-mm-/a9c5875737dddec4a95332d330168466aecb1348/c=261-182-2053-2574&r=537&c=0-0-534-712/local/-/media/USATODAY/USATODAY/2014/08/10/1407719702000-2014-08-10-Jalen-Ramsey.jpg", schImg: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/FSU_Seminoles.svg/1110px-FSU_Seminoles.svg.png",  bio: "Ramsey, who also plays a valuable role on special teams coverages, is a defensive savant with the framework that makes him a viable option at cornerback, safety or linebacker and if his 2015 tape matches or exceeds last year, he will be one of the top players drafted next spring.", strengths: ["Physical At Line Of Scrimmage", "Great Play Awareness"], weaknesses: ["Needs To Shed Blocks Better", "Needs To Gain 20lbs", "Might Not Fit All Schemes"]},
@@ -74,12 +74,17 @@
 
 		/* Get Prospects */
 		o.getProspects = function(post) {
-			var q = $q.defer();
-			$http.get("/prospect").then(function(res) {
-				console.log(res.data);
-				q.resolve(res.data);
-			});
-			return q.promise;
+			if(UserFactory.status.username) {
+				var q = $q.defer();
+				$http.get("/user/prospects").then(function(res) {
+					console.log(res.data);
+					q.resolve(res.data);
+				});
+				return q.promise;
+			} else {
+				return o.prospects;
+			}
+
 		};
 
 

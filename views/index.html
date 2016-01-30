@@ -6,15 +6,18 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap_theme.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="icon"
+      type="image/png"
+      href="http://s2.postimg.org/didxqaed1/favicon.png">
 </head>
 <body ng-controller="GlobalController as nav">
 
 	<!-- Slim Bar At The Top Of The Page -->
 	<div id="topBar">
 		<div class="pull-left" style="width: 75vw;">
-			<button class="btn btn-warning" id="menuButton" ng-click="nav.openMenu(); nav.openLogin = false;">Menu</button>
-			<div ng-if="!nav.status.username && !nav.openLogin" class="inline"><a href="" ng-click="nav.openLogin = true">Login</a> &nbsp; / &nbsp; <a href="#" ui-sref="Register">Register</a></div>
+			<button class="btn" id="menuButton" ng-click="nav.openMenu(); nav.openLogin = false;">Menu</button>
+						<button class="btn btn-warning" ng-click="nav.closeMenu(); nav.logoutUser()" ng-show="nav.status.username" href="#" style="margin-left: 0em; margin-right: 1em;">Log Out</button>
+			<div ng-if="!nav.status.username && !nav.openLogin" class="inline"><a href="" ng-click="nav.openLogin = true"> &nbsp;  &nbsp; Login</a> &nbsp; / &nbsp; <a href="#" ui-sref="Register">Register</a></div>
 			<div class="inline" ng-show="nav.openLogin">
 				<form class="inline" ng-submit="nav.loginUser();">
 							<input type="email" placeholder="Email Address" ng-model="nav.user.email" style="width: 10%" />
@@ -41,7 +44,6 @@
 			<li ui-sref="Account" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.clker.com/cliparts/B/E/h/N/z/r/gear-clear-hi.png" alt="Settings Icon" /> &nbsp; Account Settings</li>
 		</ul>
 		<br>
-		<button class="btn" ng-click="nav.closeMenu(); nav.logoutUser()" ng-show="nav.status.username" href="#">Log Out</button>
 		<button class="btn" ng-click="nav.closeMenu();">Close</button>
 	</nav>
 	<div id="menuShade" ng-click="nav.closeMenu();"></div>
