@@ -4,9 +4,68 @@ var mongoose = require("mongoose");
 var User = mongoose.model("User");
 var passport = require("passport");
 
+
+
+
+// --------------------- Big Board -----------------------------------
+
+/* Get All Prospects */
+router.post("/prospects", function(req, res, next) {
+  User.findOne({username: req.body.username}).exec(function(err,result) {
+    if(err) return next(err);
+    res.send(result.prospects);
+  });
+});
+
+/* Save Board */
+router.post("/saveboard", function(req, res, next) {
+  User.findOne({username: req.body.username}).exec(function(err,result) {
+    if(err) return next(err);
+    result.prospects = req.body.prospects;
+    result.save(function(err, saved) {
+      res.send(saved);
+    });
+  });
+});
+
+// --------------------- Drafts -----------------------------------
+
+/* Get Drafts */
+router.post("/getdrafts", function(req, res, next) {
+  User.findOne({username: req.body.username}).exec(function(err,result) {
+    if(err) return next(err);
+    res.send(result.drafts);
+  });
+});
+
+/* Add Draft */
+router.post("/adddraft", function(req, res, next) {
+  User.findOne({username: req.body.username}).exec(function(err,result) {
+    if(err) return next(err);
+    result.drafts.push(req.body.draft);
+    result.save(function(err, saved) {
+      res.send(saved);
+    });
+  });
+});
+
+
+
+// --------------------- Sign Up -----------------------------------
+
+/* Log In User */
+router.post("/login", function(req, res, next) {
+  passport.authenticate("local", function(err, user) {
+    if(err) return next(err);
+    res.send(user.createToken());
+  })(req, res, next);
+});
+
+/* Register New User */
 router.post("/register", function(req, res, next) {
   var user = new User(req.body);
   user.joined = new Date();
+  user.setPassword(req.body.password);
   user.prospects = [
     {name: "Joey Bosa", position: "DE", height: "6-5", weight: 275, rank: 1, bbRank: 1, school: "Ohio State", img: "http://www.10tv.com/content/graphics/2014/10/02/4_Joey_Bosa.jpg", schImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/2013_Ohio_State_Buckeyes_logo.svg/1040px-2013_Ohio_State_Buckeyes_logo.svg.png",  bio: "One of the stars of Ohio State's National Title run in the 2014 season, Bosa was a top high school recruit out of high school and has lived up to that high billing, leading the Buckeyes with 21 tackles for loss and 13.5 sacks as a sophomore. He is still developing his pass rush sequence and how to best use his gifts, but he has all the traits to be a top pick in the 2016 class and disruptive presence in the NFL.", strengths: ["Physical At Line Of Scrimmage", "Great Play Awareness"], weaknesses: ["Needs To Shed Blocks Better", "Needs To Gain 20lbs", "Might Not Fit All Schemes"]},
     {name: "Laremy Tunsil", position: "OT", height: "6-5", weight: 305, rank: 1, bbRank: 2, school: "Ole Miss", img: "http://i1.wp.com/djournal.com/wp-content/blogs.dir/42/files/2014/11/Tunsil-Laremy.jpg", schImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ole_Miss_rebels_Logo.svg/2000px-Ole_Miss_rebels_Logo.svg.png",  bio: "On the field, Tunsil is a nimble big man with a rare athletic skill-set for the position, showing above average balance and flexibility to easily bend, handle speed and absorb power at the point of attack. He's not a perfect player, but his flaws are more nitpicking than true weaknesses and potential injuries are the only obstacles keeping Tunsil from being one of the better left tackles at the next level.", strengths: ["Good Size", "Great Balance", "Good Change of Direction"], weaknesses: ["Overeager at Times", "Injury Concerns", "Character Concerns"]},
@@ -40,19 +99,12 @@ router.post("/register", function(req, res, next) {
     {name: "Eli Apple", position: "CB", height: "6-1", weight: 200, rank: 4, bbRank: 30, school: "Ohio State", img: "http://www4.pictures.zimbio.com/gi/Western+Michigan+v+Ohio+State+Lb6RKarVodEl.jpg", schImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/2013_Ohio_State_Buckeyes_logo.svg/1040px-2013_Ohio_State_Buckeyes_logo.svg.png",  bio: "One of the stars of Ohio State's National Title run in the 2014 season, Bosa was a top high school recruit out of high school and has lived up to that high billing, leading the Buckeyes with 21 tackles for loss and 13.5 sacks as a sophomore. He is still developing his pass rush sequence and how to best use his gifts, but he has all the traits to be a top pick in the 2016 class and disruptive presence in the NFL.", strengths: ["Physical At Line Of Scrimmage", "Great Play Awareness"], weaknesses: ["Needs To Shed Blocks Better", "Needs To Gain 20lbs", "Might Not Fit All Schemes"]},
     {name: "Kenny Clark", position: "DT", height: "6-2", weight: 310, rank: 5, bbRank: 31, school: "UCLA", img: "http://larrybrownsports.com/wp-content/uploads/2015/12/kenny-clark-ucla-560x373.jpg", schImg: "https://upload.wikimedia.org/wikipedia/en/6/6d/UCLA_Bruins_Logo.png",  bio: "One of the stars of Ohio State's National Title run in the 2014 season, Bosa was a top high school recruit out of high school and has lived up to that high billing, leading the Buckeyes with 21 tackles for loss and 13.5 sacks as a sophomore. He is still developing his pass rush sequence and how to best use his gifts, but he has all the traits to be a top pick in the 2016 class and disruptive presence in the NFL.", strengths: ["Physical At Line Of Scrimmage", "Great Play Awareness"], weaknesses: ["Needs To Shed Blocks Better", "Needs To Gain 20lbs", "Might Not Fit All Schemes"]},
   ];
-  user.setPassword(req.body.password);
   user.save(function(err, result) {
     if(err) return next(err);
     res.send(result.createToken());
   });
 });
 
-router.post("/login", function(req, res, next) {
-  passport.authenticate("local", function(err, user) {
-    if(err) return next(err);
-    res.send(user.createToken());
-  })(req, res, next);
-});
 
 
 

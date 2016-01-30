@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   salt: String,
   profilePic: String,
   prospects: Array,
-  picks: Array,
+  drafts: Array,
   joined: Date
 });
 
@@ -31,7 +31,7 @@ UserSchema.methods.createToken = function(){
       profilePic: this.profilePic,
       username: this.username,
       prospects: this.prospects,
-      picks: this.picks,
+      drafts: this.drafts,
       joined: this.joined
    }, "ThisIsASecretCode");
 };

@@ -55,21 +55,23 @@
 
   <!-- Save Buttons -->
   <div ng-show="!vm.saving">
-    <button type="button" class="btn" ng-click="vm.saving = true" ng-if="nav.loggedIn === true">Save</button>
+    <button type="button" class="btn" ng-click="vm.saving = true" ng-if="nav.status.username">Save</button>
     <button type="button" class="btn">Export</button>
-    <button type="button" class="btn" ng-click="vm.clearBoard()">Reset</button>
+    <button type="button" class="btn" ng-click="vm.clearPicks();">Reset</button>
   </div>
   <div ng-show="vm.saving">
     <div class="text-center pull-left" style="width: 25%;">
-      <label><input type="checkbox" checked><small>Share With Community</small></label>
+      <label><input type="checkbox" ng-modal="vm.draft.public" checked style="margin: .5em;"><small><strong>Share With Community</strong></small></label>
     </div>
-    <input type="text" placeholder="Mock Draft Name" style="width: 50%; font-size: 1em; padding: .5em; margin: 0;" class="pull-left"/>
+    <input type="text" placeholder="Mock Draft Name" ng-model="vm.draft.name" style="width: 50%; font-size: 1em; padding: .5em; margin: 0;" class="pull-left"/>
     <div class="pull-right" style="width: 25%;">
-      <button type="button" class="btn" ng-click="vm.saving = false" ui-sref="ViewDraft">Save</button>
+      <button type="button" class="btn" ng-disabled="!vm.draft.name" ng-click="vm.saving = false; vm.addDraft();">Save</button>
       <button type="button" class="btn" ng-click="vm.saving = false">Cancel</button>
     </div>
     <div class="clearfix"></div>
   </div>
+
+
 
   <!-- Player Modal -->
   <div id="playerModal" ng-show="vm.showModal && vm.tooltipChecked" ng-style="{'background-image': 'url(' + vm.modalPlayer.schImg + ')'}">

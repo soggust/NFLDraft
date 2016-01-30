@@ -1,6 +1,6 @@
-<div ng-controller="BigBoardController as vm" class="container text-center" ng-init="vm.getProspects()">
+<div ng-controller="BigBoardController as vm" class="container text-center">
   <br>
-  <h3><span ng-show="nav.loggedIn">My</span><span ng-show="!nav.loggedIn">The</span> Big Board</h3>
+  <h3><span ng-if="nav.status.username">My</span><span ng-if="!nav.status.username">The</span> Big Board</h3>
   <br>
   <div id="bigBoard" class="text-left">
     <div droppable drop="vm.handleDrop()"></div>
@@ -9,9 +9,9 @@
         <h1 style="padding-top: .5em;">{{ prospect.bbRank }}</h1>
       </div>
       <div class="col-xs-1 arrowIcons">
-        <img src="http://www.clker.com/cliparts/8/7/Y/H/W/e/up-arrow-circle-hi.png" alt="Up Arrow" ng-show="prospect.bbRank != 1 && nav.loggedIn" ng-click="vm.movePlayerUp(prospect);"/>
+        <img src="http://www.clker.com/cliparts/8/7/Y/H/W/e/up-arrow-circle-hi.png" alt="Up Arrow" ng-show="prospect.bbRank != 1 && nav.status.username" ng-click="vm.movePlayerUp(prospect);"/>
         <br>
-        <img src="http://www.clker.com/cliparts/y/m/X/o/s/R/down-arrow-circle-hi.png" alt="Down Arrow" ng-show="prospect.bbRank != vm.prospects.length && nav.loggedIn" style="margin-top: .75em;" ng-click="vm.movePlayerDown(prospect);"/>
+        <img src="http://www.clker.com/cliparts/y/m/X/o/s/R/down-arrow-circle-hi.png" alt="Down Arrow" ng-show="prospect.bbRank != vm.prospects.length && nav.status.username" style="margin-top: .75em;" ng-click="vm.movePlayerDown(prospect);"/>
       </div>
       <div class="col-xs-10">
         <h4 style="margin-top: .25em;"><strong>{{ prospect.name }}</strong></h4>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <br>
-  <button type="button" class="btn" ng-if="nav.loggedIn === true" ng-click="vm.saveBoard()">Save</button>
+  <button type="button" class="btn" ng-if="nav.status.username" ng-click="vm.saveBoard()">Save</button>
   <button type="button" class="btn">Export</button>
-  <button type="button" class="btn" ng-click="vm.resetBoard()" ng-show="nav.loggedIn">Reset</button>
+  <button type="button" class="btn" ng-click="vm.initBoard()" ng-show="nav.status.username">Reset</button>
 </div>

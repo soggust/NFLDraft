@@ -29,7 +29,9 @@
 			UserFactory.login(nav.user).then(function(res){
 				nav.user = {};
 				nav.openLogin = false;
+				nav.status = UserFactory.status;
 				nav.errLog = "";
+				$state.go("Home");
 			}, function(err){
 				console.log(err);
 				nav.errLog = err;
@@ -43,6 +45,7 @@
 				nav.user = {};
 				nav.status = UserFactory.status;
 				nav.errReg = "";
+				$state.go("Home");
 			}, function(err){
 				console.log(err);
 				nav.errReg = err;

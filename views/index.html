@@ -28,12 +28,12 @@
 			</div>
 			<p class="inline" ng-if="nav.status.username;"><em><small>Hello, <span class="capitalize">{{nav.status.username}}</span></small></em></p>
 		</div>
-		<h1 class="text-right" ui-sref="Home" ng-click="nav.openLogin = false;" style="cursor: pointer;">MockDrafters.com</h1>
+		<h1 class="text-right" ui-sref="Home" ng-click="nav.openLogin = false;" style="cursor: pointer;">MockDrafters.org</h1>
 	</div>
 
 	<!-- Nav Menu -->
 	<nav id="menu">
-		<h3>MockDrafters.com</h3>
+		<h3>MockDrafters.org</h3>
 		<div id="circle" ><img ng-src="{{nav.status.profilePic}}" alt="Profile Picture" ng-show="nav.status.profilePic" /><img src="http://vignette3.wikia.nocookie.net/farmville/images/8/88/US-NFL-icon.png/revision/latest?cb=20140203001641" alt="Default Profile Picture" ng-show="!nav.status.profilePic" /></div>
 		<ul class="text-left">
 			<li ui-sref="News" ng-click="nav.closeMenu();"><img src="http://www.nwcua.org/assets_site/img/icon-white-newsletter.png" alt="News Icon" /> &nbsp; Latest Draft News</li>

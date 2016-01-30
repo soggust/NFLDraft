@@ -7,11 +7,12 @@
       <form ng-submit="nav.registerUser();">
         <input type="text" placeholder="Username" ng-model="nav.user.username" />
         <input type="email" placeholder="Email Address" ng-model="nav.user.email"/>
+        <hr style="border-color: #ccc;">
         <input type="password" placeholder="Password" ng-model="nav.user.password" />
         <input type="password" placeholder="Confirm Password" ng-model="nav.user.confirm" />
         <br>
         <br>
-        <button type="submit" class="btn btn-warning" ui-sref="Home">Register</button>
+        <button type="submit" class="btn btn-warning">Register</button>
         <button type="button" class="btn" ui-sref="Home">Cancel</button>
       </form>
     </div>

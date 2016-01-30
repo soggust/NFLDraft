@@ -4,16 +4,13 @@
   <br>
   <div id="accountBox">
       <div class="row draftBox" style="margin: 0 auto; padding: 2em;">
-        <div class="col-xs-6">
-          <label>Account Name: <input type="text" /></label>
-          <br>
-          <label>Account Email: <input type="email" /></label>
-          <br>
-          <label>Location: <input type="text" /></label>
+        <div class="col-xs-6 text-left">
+          <h4>{{ nav.status.username }}</h4>
+          <h4><small>{{ nav.status.email }}</small></h4>
+          <p><strong>Joined: </strong> {{ nav.status.joined | date: ddMMyyyy }}</p>
         </div>
         <div class="col-xs-6">
           <div id="circle"><img ng-src="{{nav.status.profilePic}}" alt="Profile Picture" ng-show="nav.status.profilePic" /></div>
-          <label>Profile Picture</label>
         </div>
       </div>
   </div>

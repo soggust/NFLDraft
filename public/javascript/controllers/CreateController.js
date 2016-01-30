@@ -3,7 +3,7 @@
 	angular.module('app')
 	.controller('CreateController', CreateController);
 
-	function CreateController(HomeFactory, $scope) {
+	function CreateController(HomeFactory, $scope, UserFactory) {
 		var vm = this;
 		vm.positions = ["QB", "HB", "FB", "WR", "TE", "OT", "OG", "C", "DE", "DT", "OLB", "ILB", "CB", "S"];
 		vm.prospects = [];
@@ -15,26 +15,36 @@
 		$scope.upperMenu = '0vh';
 		$scope.lowerMenu = '50vh';
 		vm.tooltipChecked = true;
+		vm.draft = {};
 
-		vm.getNumber = function(num) {
-    	return new Array(num);
-		}
-
-		/* Define Which Player Will Be In Our Tooltip/Modal On Mouseover */
-		vm.setModalPlayer = function(player) {
-			vm.modalPlayer = player;
-		}
-
-		/* Open Menu */
-		vm.toggleMenu = function() {
-			if($scope.upperMenu === '0vh') {
-				$scope.upperMenu = '17.5vh';
-				$scope.lowerMenu = '32.5vh';
+		/* Initialize the Board */
+		vm.initBoard = function() {
+			if(UserFactory.status.username){
+				UserFactory.getProspects().then(function(res){
+					vm.prospects = res;
+				});
 			} else {
-				$scope.upperMenu = '0vh';
-				$scope.lowerMenu = '50vh';
+				vm.prospects = HomeFactory.prospects;
 			}
+		};
+		vm.initBoard();
+
+
+		/* Save the Board */
+		vm.addDraft = function() {
+			vm.draft.picks = vm.picks;
+			UserFactory.addDraft(vm.draft).then(function(res){
+				vm.draft = {};
+				vm.clearPicks();
+			});
 		}
+
+
+
+
+
+
+		/* --------------Handle Picks-----------------------*/
 
 
 		/* Add Pick */
@@ -54,6 +64,17 @@
 			}
 		}
 
+		/* Clear All Picks */
+		vm.clearPicks = function() {
+			for(var x = 0; x<vm.picks.length; x++) {
+				vm.removePick(vm.picks[x]);
+			}
+		}
+
+
+
+
+		/* --------------Misc Functionality-----------------------*/
 
 		/* Make Sure Highest Pick Is Always Next To Be Selected*/
 		vm.setCurrentPick = function() {
@@ -65,25 +86,28 @@
 			}
 		}
 
-		/* Clear The Draft */
-		vm.clearBoard = function() {
-			vm.prospects = HomeFactory.getProspects();
-			vm.sortProspects();
-			vm.setCurrentPick();
+		/* Define Which Player Will Be In Our Tooltip/Modal On Mouseover */
+		vm.setModalPlayer = function(player) {
+			vm.modalPlayer = player;
 		}
 
-		/* Gets Our Prospects Array */
-		vm.getProspects = function () {
-			HomeFactory.getProspects().then(function(res){
-				vm.prospects = res;
-			});
+		/* Open Menu */
+		vm.toggleMenu = function() {
+			if($scope.upperMenu === '0vh') {
+				$scope.upperMenu = '17.5vh';
+				$scope.lowerMenu = '32.5vh';
+			} else {
+				$scope.upperMenu = '0vh';
+				$scope.lowerMenu = '50vh';
+			}
 		}
-
 		/* Sorts Our Prospects Array */
 		vm.sortProspects = function () {
 			vm.prospects.sort(function(a, b) {
 				return parseFloat(a.bbRank) - parseFloat(b.bbRank);
 			});
 		}
+
+
 	}
 })();
