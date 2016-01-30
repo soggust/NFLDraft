@@ -6,6 +6,7 @@ var passport = require("passport");
 
 router.post("/register", function(req, res, next) {
   var user = new User(req.body);
+  user.joined = new Date();
   user.setPassword(req.body.password);
   user.save(function(err, result) {
     if(err) return next(err);

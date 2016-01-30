@@ -118,6 +118,13 @@ button:active {
 label {
   font-weight: normal;
 }
+/* For The TopBar Input On Index */
+form .btn {
+  max-width: 3.5vw;
+  max-height: 3.5vh;
+  font-size: .6em;
+}
+
 
 /* Nav */
 nav {
@@ -328,7 +335,9 @@ nav img {
   background: #ddd;
   border-color: #aaa;
 }
-
+.capitalize {
+  text-transform: capitalize;
+}
 
 
 /* IDs */
@@ -348,14 +357,17 @@ nav img {
 }
 
 #circle {
-  width: 10vh;
-  height: 10vh;
+  width: 15vh;
+  height: 15vh;
   border-radius: 100%;
-  background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Kansas_City_Chiefs_logo.svg/1280px-Kansas_City_Chiefs_logo.svg.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: 1em auto;
+  border: solid 2px #ccc;
+  margin: 2em auto 1em auto;
+  overflow: hidden;
+  background-color: white;
+}
+#circle img {
+  max-height: 15vh;
+  max-width: 15vh;
 }
 #coverImg {
   width: 100%;

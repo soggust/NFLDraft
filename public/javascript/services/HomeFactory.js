@@ -72,10 +72,29 @@
 			{number: 31, team: "Carolina Panthers", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Carolina_Panthers_logo_2012.svg/1280px-Carolina_Panthers_logo_2012.svg.png", player: null, needs: ["OT", "S", "WR", "DE"]}
 		];
 
-
+		/* Get Prospects */
 		o.getProspects = function(post) {
 			var q = $q.defer();
 			$http.get("/prospect").then(function(res) {
+				console.log(res.data);
+				q.resolve(res.data);
+			});
+			return q.promise;
+		};
+
+
+		/* Move Player Ranks Up and Down */
+		o.movePlayerUp = function(player) {
+			var q = $q.defer();
+			$http.post("/prospect/movePlayerUp", player).then(function(res) {
+				console.log(res.data);
+				q.resolve(res.data);
+			});
+			return q.promise;
+		};
+		o.movePlayerDown = function(player) {
+			var q = $q.defer();
+			$http.post("/prospect/movePlayerUp", player).then(function(res) {
 				console.log(res.data);
 				q.resolve(res.data);
 			});

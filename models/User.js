@@ -8,7 +8,9 @@ var UserSchema = new mongoose.Schema({
   passwordHash: String,
   salt: String,
   profilePic: String,
-  joined: String
+  prospects: Array,
+  picks: Array,
+  joined: Date
 });
 
 UserSchema.methods.setPassword = function(password){
@@ -28,7 +30,9 @@ UserSchema.methods.createToken = function(){
       email: this.email,
       profilePic: this.profilePic,
       username: this.username,
-      joined: String
+      prospects: this.prospects,
+      picks: this.picks,
+      joined: this.joined
    }, "ThisIsASecretCode");
 };
 

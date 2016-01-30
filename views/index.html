@@ -6,19 +6,24 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap_theme.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
-	<link rel="icon"
-      type="image/x-icon"
-      href="favicon.ico">
+	<link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body ng-controller="GlobalController as nav">
 
 	<!-- Slim Bar At The Top Of The Page -->
 	<div id="topBar">
-		<div class="pull-left" style="width: 85vw;">
+		<div class="pull-left" style="width: 75vw;">
 			<button class="btn btn-warning" id="menuButton" ng-click="nav.openMenu(); nav.openLogin = false;">Menu</button>
-			<div ng-if="nav.loggedIn === false && !nav.openLogin" class="inline"><a href="" ng-click="nav.openLogin = true">Login</a> &nbsp; / &nbsp; <a href="#" ui-sref="Register">Register</a></div>
-			<div class="inline" ng-show="nav.openLogin"><input type="email" placeholder="Email Address" style="width: 10%" /> <input type="password" placeholder="Password" style="width: 10%" /><a href="" ng-click="nav.openLogin = false; nav.loggedIn = true;"><small style="padding-left: 1em;">&nbsp; Log In</small></a> <a href="" ng-click="nav.openLogin = false;"><small style="padding-left: 1em;">Cancel</small></a></div>
-			<p class="inline" ng-if="nav.loggedIn === true"><em><small>Hello, August</small></em></p>
+			<div ng-if="!nav.status.username && !nav.openLogin" class="inline"><a href="" ng-click="nav.openLogin = true">Login</a> &nbsp; / &nbsp; <a href="#" ui-sref="Register">Register</a></div>
+			<div class="inline" ng-show="nav.openLogin">
+				<form class="inline" ng-submit="nav.loginUser();">
+							<input type="email" placeholder="Email Address" ng-model="nav.user.email" style="width: 10%" />
+							<input type="password" placeholder="Password" ng-model="nav.user.password" style="width: 10%" />
+							<button type="submit" class="btn">Log In</button>
+							<button type="button" ng-click="nav.user = {}; nav.openLogin = false;" class="btn">Cancel</button>
+					</form>
+			</div>
+			<p class="inline" ng-if="nav.status.username;"><em><small>Hello, <span class="capitalize">{{nav.status.username}}</span></small></em></p>
 		</div>
 		<h1 class="text-right" ui-sref="Home" ng-click="nav.openLogin = false;" style="cursor: pointer;">MockDrafters.com</h1>
 	</div>
@@ -26,17 +31,17 @@
 	<!-- Nav Menu -->
 	<nav id="menu">
 		<h3>MockDrafters.com</h3>
-		<div id="circle"></div>
+		<div id="circle" ><img ng-src="{{nav.status.profilePic}}" alt="Profile Picture" ng-show="nav.status.profilePic" /><img src="http://vignette3.wikia.nocookie.net/farmville/images/8/88/US-NFL-icon.png/revision/latest?cb=20140203001641" alt="Default Profile Picture" ng-show="!nav.status.profilePic" /></div>
 		<ul class="text-left">
 			<li ui-sref="News" ng-click="nav.closeMenu();"><img src="http://www.nwcua.org/assets_site/img/icon-white-newsletter.png" alt="News Icon" /> &nbsp; Latest Draft News</li>
-			<li ui-sref="BigBoard" ng-click="nav.closeMenu();"><img src="http://www.iconsplace.com/download/white-clipboard-512.png" alt="Settings Icon" /> &nbsp; <span ng-show="nav.loggedIn">My</span><span ng-show="!nav.loggedIn">The</span> Big Board</li>
+			<li ui-sref="BigBoard" ng-click="nav.closeMenu();"><img src="http://www.iconsplace.com/download/white-clipboard-512.png" alt="Settings Icon" /> &nbsp; <span ng-show="nav.status.username">My</span><span ng-show="!nav.status.username">The</span> Big Board</li>
 			<li ui-sref="Create" ng-click="nav.closeMenu();"><img src="http://intronetworks.com/wp-content/uploads/2014/03/community_icon_white.png" alt="Settings Icon" /> &nbsp; Create Draft</li>
-			<li ui-sref="Drafts" ng-click="nav.closeMenu();" ng-show="nav.loggedIn === true"><img src="http://www.iconsplace.com/download/white-opera-glasses-256.png" alt="Settings Icon" /> &nbsp; My Drafts</li>
+			<li ui-sref="Drafts" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.iconsplace.com/download/white-opera-glasses-256.png" alt="Settings Icon" /> &nbsp; My Drafts</li>
 			<li ui-sref="Community" ng-click="nav.closeMenu();" ><img src="http://www.clker.com/cliparts/a/j/P/e/7/u/white-globe-hi.png" alt="Settings Icon" /> &nbsp; Community</li>
-			<li ui-sref="Account" ng-click="nav.closeMenu();" ng-show="nav.loggedIn"><img src="http://www.clker.com/cliparts/B/E/h/N/z/r/gear-clear-hi.png" alt="Settings Icon" /> &nbsp; Account Settings</li>
+			<li ui-sref="Account" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.clker.com/cliparts/B/E/h/N/z/r/gear-clear-hi.png" alt="Settings Icon" /> &nbsp; Account Settings</li>
 		</ul>
 		<br>
-		<button class="btn" ng-click="nav.closeMenu(); nav.loggedIn = false; nav.logOut();" ng-show="nav.loggedIn" href="#">Log Out</button>
+		<button class="btn" ng-click="nav.closeMenu(); nav.logoutUser()" ng-show="nav.status.username" href="#">Log Out</button>
 		<button class="btn" ng-click="nav.closeMenu();">Close</button>
 	</nav>
 	<div id="menuShade" ng-click="nav.closeMenu();"></div>
