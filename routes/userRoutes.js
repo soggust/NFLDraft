@@ -28,27 +28,6 @@ router.post("/saveboard", function(req, res, next) {
   });
 });
 
-// --------------------- Drafts -----------------------------------
-
-/* Get Drafts */
-router.post("/getdrafts", function(req, res, next) {
-  User.findOne({username: req.body.username}).exec(function(err,result) {
-    if(err) return next(err);
-    res.send(result.drafts);
-  });
-});
-
-/* Add Draft */
-router.post("/adddraft", function(req, res, next) {
-  User.findOne({username: req.body.username}).exec(function(err,result) {
-    if(err) return next(err);
-    result.drafts.push(req.body.draft);
-    result.save(function(err, saved) {
-      res.send(saved);
-    });
-  });
-});
-
 
 
 // --------------------- Sign Up -----------------------------------

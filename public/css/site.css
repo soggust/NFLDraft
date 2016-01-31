@@ -151,14 +151,6 @@ nav li:hover {
   cursor: pointer;
   background: #555;
 }
-nav .btn {
-  background: #fff;
-  color: #333;
-}
-nav .btn:hover {
-  background: #aaa;
-  color: #333 !important; /*Bootstrap .btn class sets hover to white */
-}
 nav img {
   max-width: 3vw;
   max-height: 3vh;
@@ -205,8 +197,11 @@ nav img {
   cursor:-moz-grabbing;
 }
 .selectedPick {
-  background-color: #aaa;
-  color: #fff;
+  background-color: rgba(0,0,0,.75);
+  color: white;
+}
+.selectedPick:hover {
+  background-color: rgba(0,0,0,.5);
 }
 #posButtonBox {
   width: 100%;
@@ -346,10 +341,6 @@ nav img {
 #menuButton {
   margin: 1.5em .5em 1.5em 1em;
   border: none;
-  background: #333;
-}
-#menuButton:hover {
-  background: #666;
 }
 #topBar {
   background: url('http://s17.postimg.org/ymr2mezsv/image.jpg');

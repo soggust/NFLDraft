@@ -37,16 +37,17 @@
 		o.getDrafts = function() {
 			var q = $q.defer();
 			var parcel = {username: o.status.username};
-			$http.post("/user/getdrafts", parcel).then(function(res) {
+			$http.post("/draft/", parcel).then(function(res) {
 				q.resolve(res.data);
 			});
 			return q.promise;
 		};
 
 		o.addDraft = function(board) {
+			var created = new Date();
 			var q = $q.defer();
-			var parcel = {username: o.status.username, draft: board};
-			$http.post("/user/adddraft", parcel).then(function(res) {
+			var parcel = {name: board.name, draft: board.picks, public: board.public, created: created, creator: o.status.username};
+			$http.post("/draft/add", parcel).then(function(res) {
 				q.resolve();
 			});
 			return q.promise;

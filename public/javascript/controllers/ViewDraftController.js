@@ -7,7 +7,6 @@
 		var vm = this;
 		vm.draft = HomeFactory.currentDraft;
 
-		console.log(vm.draft);
 
 	}
 })();

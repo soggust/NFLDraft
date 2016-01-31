@@ -5,6 +5,8 @@
 
 	function CommunityController() {
 		var vm = this;
+		vm.openMenu = false;
+		vm.drafts = [];
 
 	}
 })();

@@ -9,8 +9,7 @@ var port = process.env.PORT || 3000;
 var passport = require('passport');
 var mongoose = require('mongoose');
 require("./models/User");
-require("./models/Prospect");
-require("./models/Pick");
+require("./models/Draft");
 require("./config/passport");
 
 // DATABASE CONNECTION
@@ -52,13 +51,11 @@ app.get('/', function(req, res) {
 
 // ROUTE LINKS
 var userRoutes = require('./routes/userRoutes');
-var prospectRoutes = require('./routes/prospectRoutes');
-var pickRoutes = require('./routes/pickRoutes');
+var drafts = require('./routes/draftRoutes');
 
 // Use Routes
 app.use("/user", userRoutes);
-app.use("/prospect", prospectRoutes);
-app.use("/pick", pickRoutes);
+app.use("/draft", drafts);
 
 // Handle Errors
 app.use(function(err, req, res, next) {

@@ -15,7 +15,7 @@
 		$scope.upperMenu = '0vh';
 		$scope.lowerMenu = '50vh';
 		vm.tooltipChecked = true;
-		vm.draft = {};
+		vm.draft = { public: true };
 
 		/* Initialize the Board */
 		vm.initBoard = function() {
@@ -34,44 +34,10 @@
 		vm.addDraft = function() {
 			vm.draft.picks = vm.picks;
 			UserFactory.addDraft(vm.draft).then(function(res){
-				vm.draft = {};
+				vm.draft = { public: true };
 				vm.clearPicks();
 			});
 		}
-
-
-
-
-
-
-		/* --------------Handle Picks-----------------------*/
-
-
-		/* Add Pick */
-		vm.addToDraft = function(player, index) {
-			vm.picks[vm.currentPick - 1].player = player;
-			vm.prospects.splice(vm.prospects.indexOf(player), 1);
-			vm.setCurrentPick();
-		}
-
-		/* Remove Pick */
-		vm.removePick = function(pick) {
-			if(pick.player) {
-				vm.prospects.splice(0, 0, pick.player);
-				pick.player = null;
-				vm.sortProspects();
-				vm.setCurrentPick();
-			}
-		}
-
-		/* Clear All Picks */
-		vm.clearPicks = function() {
-			for(var x = 0; x<vm.picks.length; x++) {
-				vm.removePick(vm.picks[x]);
-			}
-		}
-
-
 
 
 		/* --------------Misc Functionality-----------------------*/
@@ -107,6 +73,34 @@
 				return parseFloat(a.bbRank) - parseFloat(b.bbRank);
 			});
 		}
+
+		/* --------------Handle Picks-----------------------*/
+
+
+		/* Add Pick */
+		vm.addToDraft = function(player, index) {
+			vm.picks[vm.currentPick - 1].player = player;
+			vm.prospects.splice(vm.prospects.indexOf(player), 1);
+			vm.setCurrentPick();
+		}
+
+		/* Remove Pick */
+		vm.removePick = function(pick) {
+			if(pick.player) {
+				vm.prospects.splice(0, 0, pick.player);
+				pick.player = null;
+				vm.sortProspects();
+				vm.setCurrentPick();
+			}
+		}
+
+		/* Clear All Picks */
+		vm.clearPicks = function() {
+			for(var x = 0; x<vm.picks.length; x++) {
+				vm.removePick(vm.picks[x]);
+			}
+		}
+		vm.clearPicks();
 
 
 	}

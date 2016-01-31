@@ -3,10 +3,12 @@
 	angular.module('app')
 	.controller('GlobalController', GlobalController);
 
-	function GlobalController(UserFactory, $state) {
+	function GlobalController(UserFactory, $state, $rootScope, $window) {
 		var nav = this;
 		nav.loggedIn = false;
 		nav.openLogin = false;
+		nav.previousState;
+		nav.currentState;
 		nav.status = UserFactory.status;
 		nav.user = {};
 
@@ -20,9 +22,11 @@
 			document.getElementById("menuShade").style.display = "none";
 		}
 
-		nav.log = function() {
-			console.log(nav.status);
-		}
+		/* Track State Changes */
+	  $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+    	nav.previousState = from.name;
+    	nav.currentState = to.name;
+		});
 
 		/* Login User */
 		nav.loginUser = function(){
@@ -56,7 +60,7 @@
 	nav.logoutUser = function() {
 		UserFactory.logout();
 		nav.status = {};
-		$state.go("Home");
+		$window.location.reload();
 	};
 
 
