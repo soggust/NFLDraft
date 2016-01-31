@@ -74,26 +74,22 @@
         <img src="http://findicons.com/files/icons/2799/flat_icons/256/trophy.png" alt="Trophy Icon" style="max-width: 2.5em; position: absolute; top: .5em; left: .5em;"/>
       </div>
 
-      <div class="draft" ui-sref="ViewDraft" style="height: 60vh; border: solid 1px #ccc; padding: 1.5em; color:#aaa;">
+      <div class="draft" ng-repeat="draft in vm.drafts track by $index" ng-click="vm.setCurrentDraft(draft);" ui-sref="ViewDraft" style="height: 60vh; border: solid 1px #ccc; padding: 1.5em; color:#aaa;">
         <div class="text-center">
             <img src="http://s7.postimg.org/4db7n77yj/blackdraft.png" alt="Draft Icon" style="max-width: 5vw; opacity: .5;"/>
         </div>
         <hr style="border-color: #aaa;">
-        <p>Something New...<br><small>PuppyLove1112</small><br><small>1/13/2016</small><br><span style="font-size: .6em;"><img src="http://www.kerryevans.com/resources/images/icons/30x30/thumbs-up.png" alt="Thumbs Up Icon" style="width: 1vw; opacity: .3;" />&nbsp;: 1,173</span></p>
+        <p><strong>{{draft.name}}</strong><br><small>{{draft.creator}}</small><br><small>{{draft.created | date: ddMMyyyy}}</small><br><span style="font-size: .6em;"><img src="http://www.kerryevans.com/resources/images/icons/30x30/thumbs-up.png" alt="Thumbs Up Icon" style="width: 1vw; opacity: .3;" />&nbsp;: {{draft.likes}}</span></p>
         <hr style="border-color: #aaa;">
         <p>
           <small>
-            #1 - Laremy Tunsil OT | Ole Miss <br/>
-            #2 - Jared Goff QB | California <br/>
-            #3 - Joey Bosa DE | Ohio State <br/>
-            #4 - Jalen Ramsey CB | Florida State <br/>
-            #5 - Myles Jack OLB | UCLA <br/>
+            <span ng-repeat="pick in draft.draft | limitTo: 5">#{{pick.number}} - {{pick.player.name}} {{pick.player.position}} | {{pick.player.school}} <br/></span>
             <div class="text-center">
               ...
             </div>
           </small>
         </p>
-        <h1 class="text-center" style="position: absolute; bottom: .5em; left: 32.5%; color: #ccc;">#4</h1>
+        <h1 class="text-center" style="position: absolute; bottom: .5em; left: 32.5%; color: #ccc;">#{{ $index + 4 }}</h1>
       </div>
 
       <img src="http://www.clker.com/cliparts/V/1/Z/A/h/U/left-arrow-right-hi.png" alt="Right Arrow Icon" ng-click="" id="comArrow" />

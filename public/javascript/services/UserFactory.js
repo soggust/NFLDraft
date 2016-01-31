@@ -34,6 +34,14 @@
 
 		// ------------------- Drafts --------------------------
 
+		o.getAllDrafts = function() {
+			var q = $q.defer();
+			$http.get("/draft/").then(function(res) {
+				q.resolve(res.data);
+			});
+			return q.promise;
+		}
+
 		o.getDrafts = function() {
 			var q = $q.defer();
 			var parcel = {username: o.status.username};
@@ -46,7 +54,7 @@
 		o.addDraft = function(board) {
 			var created = new Date();
 			var q = $q.defer();
-			var parcel = {name: board.name, draft: board.picks, public: board.public, created: created, creator: o.status.username};
+			var parcel = {name: board.name, draft: board.picks, public: board.public, created: created, creator: o.status.username, likes: 0};
 			$http.post("/draft/add", parcel).then(function(res) {
 				q.resolve();
 			});

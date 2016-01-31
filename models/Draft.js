@@ -6,6 +6,7 @@ var DraftSchema = new mongoose.Schema({
   creator: String,
   created: Date,
   draft: Array,
+  likes: Number,
   public: Boolean
 });
 

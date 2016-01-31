@@ -71,7 +71,7 @@ h4 {
 
 /* Inputs */
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"], textarea {
   width: 80%;
   background: #333;
   outline: none;
@@ -80,6 +80,10 @@ input[type="text"], input[type="email"], input[type="password"] {
   padding: .5em;
   font-size: .75em;
   color: #fff;
+}
+textarea {
+  resize: none;
+  height: 20vh;
 }
 /* Placeholder Text */
 input::-webkit-input-placeholder {
@@ -156,7 +160,7 @@ nav img {
   max-height: 3vh;
   display: inline;
 }
-#menuShade {
+#menuShade, #shareShade {
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -167,7 +171,9 @@ nav img {
   z-index: 999;
   display: none;
 }
-
+#shareShade {
+  display: block;
+}
 
 
 /* Draft */
@@ -199,6 +205,7 @@ nav img {
 .selectedPick {
   background-color: rgba(0,0,0,.75);
   color: white;
+  padding: 1.75em .5em;
 }
 .selectedPick:hover {
   background-color: rgba(0,0,0,.5);
@@ -336,6 +343,7 @@ nav img {
 }
 
 
+
 /* IDs */
 
 #menuButton {
@@ -391,4 +399,15 @@ nav img {
 #comArrow:hover {
   opacity: 1;
   cursor: pointer;
+}
+#shareBox {
+  width: 50vw;
+  height: 60vh;
+  position: fixed;
+  z-index: 9999999;
+  top: 20%;
+  left: 25%;
+  cursor: default;
+  background: url('http://s17.postimg.org/ymr2mezsv/image.jpg');
+  background-size: cover;
 }

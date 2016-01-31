@@ -32,28 +32,51 @@
 	</div>
 
 	<!-- Nav Menu -->
-	<nav id="menu">
-		<h3>MockDrafters.org</h3>
-		<div id="circle" ><img ng-src="{{nav.status.profilePic}}" alt="Profile Picture" ng-show="nav.status.profilePic" /><img src="http://vignette3.wikia.nocookie.net/farmville/images/8/88/US-NFL-icon.png/revision/latest?cb=20140203001641" alt="Default Profile Picture" ng-show="!nav.status.profilePic" /></div>
-		<ul class="text-left">
-			<li ui-sref="News" ng-click="nav.closeMenu();"><img src="http://www.nwcua.org/assets_site/img/icon-white-newsletter.png" alt="News Icon" /> &nbsp; Latest Draft News</li>
-			<li ui-sref="BigBoard" ng-click="nav.closeMenu();"><img src="http://www.iconsplace.com/download/white-clipboard-512.png" alt="Settings Icon" /> &nbsp; <span ng-show="nav.status.username">My</span><span ng-show="!nav.status.username">The</span> Big Board</li>
-			<li ui-sref="Create" ng-click="nav.closeMenu();"><img src="http://intronetworks.com/wp-content/uploads/2014/03/community_icon_white.png" alt="Settings Icon" /> &nbsp; Create Draft</li>
-			<li ui-sref="Drafts" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.iconsplace.com/download/white-opera-glasses-256.png" alt="Settings Icon" /> &nbsp; My Drafts</li>
-			<li ui-sref="Community" ng-click="nav.closeMenu();" ><img src="http://www.clker.com/cliparts/a/j/P/e/7/u/white-globe-hi.png" alt="Settings Icon" /> &nbsp; Community</li>
-			<li ui-sref="Account" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.clker.com/cliparts/B/E/h/N/z/r/gear-clear-hi.png" alt="Settings Icon" /> &nbsp; Account Settings</li>
-		</ul>
-		<br>
-		<button class="btn btn-warning" ng-click="nav.closeMenu();">Close</button>
-	</nav>
-	<div id="menuShade" ng-click="nav.closeMenu();"></div>
+		<nav id="menu">
+			<h3>MockDrafters.org</h3>
+			<div id="circle" ><img ng-src="{{nav.status.profilePic}}" alt="Profile Picture" ng-show="nav.status.profilePic" /><img src="http://vignette3.wikia.nocookie.net/farmville/images/8/88/US-NFL-icon.png/revision/latest?cb=20140203001641" alt="Default Profile Picture" ng-show="!nav.status.profilePic" /></div>
+			<ul class="text-left">
+				<li ui-sref="News" ng-click="nav.closeMenu();"><img src="http://www.nwcua.org/assets_site/img/icon-white-newsletter.png" alt="News Icon" /> &nbsp; Latest Draft News</li>
+				<li ui-sref="BigBoard" ng-click="nav.closeMenu();"><img src="http://www.iconsplace.com/download/white-clipboard-512.png" alt="Settings Icon" /> &nbsp; <span ng-show="nav.status.username">My</span><span ng-show="!nav.status.username">The</span> Big Board</li>
+				<li ui-sref="Create" ng-click="nav.closeMenu();"><img src="http://intronetworks.com/wp-content/uploads/2014/03/community_icon_white.png" alt="Settings Icon" /> &nbsp; Create Draft</li>
+				<li ui-sref="Drafts" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.iconsplace.com/download/white-opera-glasses-256.png" alt="Settings Icon" /> &nbsp; My Drafts</li>
+				<li ui-sref="Community" ng-click="nav.closeMenu();" ><img src="http://www.clker.com/cliparts/a/j/P/e/7/u/white-globe-hi.png" alt="Settings Icon" /> &nbsp; Community</li>
+				<li ui-sref="Account" ng-click="nav.closeMenu();" ng-show="nav.status.username"><img src="http://www.clker.com/cliparts/B/E/h/N/z/r/gear-clear-hi.png" alt="Settings Icon" /> &nbsp; Account Settings</li>
+			</ul>
+			<br>
+			<button class="btn btn-warning" ng-click="nav.closenMenu()">Close</button>
+		</nav>
+		<div id="menuShade" ng-click="nav.closeMenu()"></div>
+
 
 
 	<!-- Main View -->
 	<ui-view></ui-view>
 
 
-
+	<!-- Share Modal -->
+	<div id="shareModal" ng-show="nav.sharing">
+		<div id="shareBox" class="text-center">
+			<br>
+			<h3>Share The Love</h3>
+			<br>
+			<hr style="border-color: #ccc;">
+			<div class="row" style="padding: 1em; margin-bottom: 1em;">
+				<div class="col-xs-6">
+					<p><strong>Share Via Link:</strong></p>
+					<input type="text" />
+				</div>
+				<div class="col-xs-6">
+					<p><strong>Share Via Forum Code:</strong></p>
+					<textarea></textarea>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<button class="btn" ng-click="nav.sharing = false">Close</button>
+		</div>
+		<br>
+		<div id="shareShade" ng-click="nav.sharing = false;"></div>
+	</div>
 
 	<!-- Ext Libs -->
 	<script src="angular/angular.min.js"></script>

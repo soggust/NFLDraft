@@ -7,10 +7,12 @@
 		var nav = this;
 		nav.loggedIn = false;
 		nav.openLogin = false;
+		nav.sharing = false;
 		nav.previousState;
 		nav.currentState;
 		nav.status = UserFactory.status;
 		nav.user = {};
+		nav.currentBoard = [];
 
 		/* Open And Close Menu */
 		nav.openMenu = function() {

@@ -8,12 +8,13 @@
   <!-- Left Box -->
   <div class="draftBox pull-left" style="width: 65%">
     <h3>2016 NFL Draft Order - </h3>
-    <h4 class="text-center"><small>Round One:</small></h4>
-    <div class="pick text-left" ng-repeat="i in vm.picks" ng-style="{'background-image': 'url(' + i.logo + ')'} " ng-class="{'selectedPick':i.player}" ng-click="vm.removePick(i);">
+    <br>
+    <!-- <h4 class="text-center"><small>Round One:</small></h4> -->
+    <div class="pick text-left" ng-repeat="i in vm.picks" ng-style="{'background-image': 'url(' + i.logo + ')'} " ng-class="{'selectedPick':i.player}" ng-click="vm.removePick(i);" style="padding: .5em;">
       <div ng-show="i.player">
-          <h4 ng-show="i.player" style="margin-top: 1.15em">{{ i.player.name }} - {{ i.player.position }} | {{ i.player.school }}</h4>
+          <h4 ng-show="i.player" style="margin-top: 1.15em; margin-left: .25em;">{{ i.player.name }} - {{ i.player.position }} | {{ i.player.school }}</h4>
       </div>
-      <div ng-show="!i.player">
+      <div ng-show="!i.player" style="padding-left: .5em;">
         <h4>{{ i.team }}</h4>
         <p>#{{i.number}} - <small>Team Needs: <span ng-repeat="need in i.needs"><small><strong>{{ need }} </strong></small></span></small></p>
       </div>
@@ -38,7 +39,9 @@
       <p><small>Displaying: {{vm.searchFilter.position}}</small></p>
     </div>
     <div style="overflow-y: auto;" ng-style="{'height': lowerMenu}">
-          <div class="availPlayer" ng-repeat="i in vm.prospects | filter: vm.searchFilter : true | filter: {'name': searchPlayer} | limitTo:25 | orderBy: 'bbRank'" ng-mouseenter="vm.showModal = true; vm.setModalPlayer(i)" ng-mouseleave="vm.showModal = false" ng-click="vm.addToDraft(i, 0)" ng-style="{'background-image': 'url(' + i.schImg + ')'}"><strong><small>({{i.bbRank}})</small> {{ i.name }} </strong> &nbsp; | &nbsp; {{i.position}} <small>({{i.rank}})</small></div>
+      <div class="availPlayer" ng-repeat="i in vm.prospects | filter: vm.searchFilter : true | filter: {'name': searchPlayer} | limitTo:25 | orderBy: 'bbRank'" ng-mouseenter="vm.showModal = true; vm.setModalPlayer(i)" ng-mouseleave="vm.showModal = false" ng-click="vm.addToDraft(i, 0)" ng-style="{'background-image': 'url(' + i.schImg + ')'}"><strong><small>({{i.bbRank}})</small> {{ i.name }} </strong> &nbsp; | &nbsp; {{i.position}} <small>({{i.rank}})</small></div>
+      <br />
+      <br />
     </div>
   </div>
   <div class="clearfix"></div>
@@ -56,7 +59,7 @@
   <!-- Save Buttons -->
   <div ng-show="!vm.saving">
     <button type="button" class="btn btn-warning" ng-click="vm.saving = true" ng-if="nav.status.username">Save</button>
-    <button type="button" class="btn">Share</button>
+    <button type="button" class="btn" ng-click="nav.sharing = true;">Share</button>
     <button type="button" class="btn" ng-click="vm.clearPicks();">Reset</button>
   </div>
   <div ng-show="vm.saving">

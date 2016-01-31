@@ -1,12 +1,12 @@
 <div ng-controller="ViewDraftController as vm" class="container text-center">
   <br>
-  <h3>View Draft</h3>
-  <br>
-  <div class="draftBox" style="width: 100%;">
-    <h3 class="text-center">Round One:</h3>
-    <div class="pick text-left" ng-repeat="i in vm.draft.draft" ng-style="{'background-image': 'url(' + i.logo + ')'} " ng-class="{'selectedPick':i.player}">
+  <div class="draftBox" style="width: 100%; height: 75vh;">
+    <h3 class="text-center"><strong>{{ vm.draft.name }}</strong></h3>
+    <h4 class="text-center"><small>{{ vm.draft.creator }} | <em><small>{{ vm.draft.created | date: ddMMyyyy }}</small></em></small></h4>
+    <div class="pick text-left" ng-repeat="i in vm.draft.draft" ng-style="{'background-image': 'url(' + i.logo + ')'}" ng-class="{'selectedPick':i.player}">
       <div ng-show="i.player">
-          <h4 ng-show="i.player" style="margin-top: 1.15em">{{ i.player.name }} - {{ i.player.position }} | {{ i.player.school }}</h4>
+          <h1 class="inline" style="text-shadow: none; color: #aaa;" style="margin-top: .5em; padding-top: .5em;">#{{i.number}}</h1>
+          <h4 class="inline" ng-show="i.player" style="margin: 0; padding: 0;">{{ i.player.name }} - {{ i.player.position }} | {{ i.player.school }}</h4>
       </div>
       <div ng-show="!i.player">
         <h4>{{ i.team }}</h4>

@@ -21,6 +21,6 @@
   </div>
   <br>
   <button type="button" class="btn btn-warning" ng-if="nav.status.username" ng-click="vm.saveBoard()">Save</button>
-  <button type="button" class="btn">Share</button>
+  <button type="button" class="btn" ng-click="nav.currentBoard = vm.prospects; nav.sharing = true;">Share</button>
   <button type="button" class="btn" ng-click="vm.initBoard()" ng-show="nav.status.username">Reset</button>
 </div>

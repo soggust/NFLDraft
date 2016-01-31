@@ -6,6 +6,14 @@ var ObjectID = require('mongodb').ObjectID;
 
 // --------------------- Drafts -----------------------------------
 
+/* Get All Public Drafts */
+router.get("/", function(req, res, next) {
+  Draft.find({public: true}).limit(1).exec(function(err,result) {
+    if(err) return next(err);
+    res.send(result);
+  });
+});
+
 /* Get My Drafts */
 router.post("/", function(req, res, next) {
   Draft.find({creator: req.body.username}).exec(function(err,result) {
@@ -24,6 +32,7 @@ router.post("/add", function(req, res, next) {
     res.send(result);
   });
 });
+
 
 // router.post("/", function(req, res, next) {
 //   var grumpy = new GrumpyPost(req.body);

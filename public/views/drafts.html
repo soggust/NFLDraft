@@ -2,16 +2,18 @@
   <br>
   <h3>My Drafts</h3>
   <br>
-  <p ng-show="vm.drafts.length < 1">You don't have any mock drafts yet! Start by <span ui-sref="Create" style="color: #f90; cursor: pointer;">creating</span> a new mock now!</p>
-  <div class="draft" ng-repeat="i in vm.drafts" ui-sref="ViewDraft" ng-click="vm.setCurrentDraft(i);" style="color: #aaa;">
-    <img src="http://uxrepo.com/static/icon-sets/elusive/svg/group.svg" alt="Draft Icon" style="max-width: 5vw; opacity: .25;"/>
-    <p><strong>{{ i.name }}</strong></p>
-    <p><small>{{ i.created | date: ddMMyyyy }}</small></p>
-    <hr style="border-color: #aaa;">
-    <img src="http://www.clker.com/cliparts/2/L/g/6/7/b/black-globe-icon-1234-hi.png" alt="Global Icon" ng-if="i.public" style="max-width: 1.5vw; margin: 0 auto;"/>
-    <img src="http://www.iconsdb.com/icons/preview/gray/monitor-xxl.png" alt="Private Icon" ng-if="!i.public" style="max-width: 1.5vw; margin: 0 auto; opacity: .7;"/>
+  <div class="draftBox" style="width: 100%;">
+    <p ng-show="vm.drafts.length < 1">You don't have any mock drafts yet! Start by <span ui-sref="Create" style="color: #f90; cursor: pointer;">creating</span> a new mock now!</p>
+    <div class="draft" ng-repeat="i in vm.drafts" ui-sref="ViewDraft" ng-click="vm.setCurrentDraft(i);" style="color: #aaa;">
+      <img src="http://uxrepo.com/static/icon-sets/elusive/svg/group.svg" alt="Draft Icon" style="max-width: 5vw; opacity: .25;"/>
+      <p><strong>{{ i.name }}</strong></p>
+      <p><small>{{ i.created | date: ddMMyyyy }}</small></p>
+      <hr style="border-color: #aaa;">
+      <img src="http://www.clker.com/cliparts/2/L/g/6/7/b/black-globe-icon-1234-hi.png" alt="Global Icon" ng-if="i.public" style="max-width: 1.5vw; margin: 0 auto;"/>
+      <img src="http://findicons.com/files/icons/949/token/256/lock.png" alt="Private Icon" ng-if="!i.public" style="max-width: 1.5vw; margin: 0 auto; opacity: .7;"/>
+    </div>
   </div>
   <br>
-  <br>
+  <button type="button" class="btn btn-warning" ui-sref="Create" ng-if="!vm.drafts.length < 1">Create</button>
   <button type="button" class="btn" ui-sref="{{nav.previousState}}">Go Back</button>
 </div>

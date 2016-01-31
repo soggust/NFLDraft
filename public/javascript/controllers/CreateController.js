@@ -5,7 +5,7 @@
 
 	function CreateController(HomeFactory, $scope, UserFactory) {
 		var vm = this;
-		vm.positions = ["QB", "HB", "FB", "WR", "TE", "OT", "OG", "C", "DE", "DT", "OLB", "ILB", "CB", "S"];
+		vm.positions = ["QB", "RB", "WR", "TE", "OT", "OG", "C ", "DE", "DT", "OLB", "ILB", "CB", "S "];
 		vm.prospects = [];
 		vm.picks = HomeFactory.picks;
 		vm.showModal = false;
